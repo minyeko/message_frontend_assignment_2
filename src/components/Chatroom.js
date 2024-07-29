@@ -39,7 +39,7 @@ function ChatRoom(props) {
         let config = {
             method: 'post',
             maxBodyLength: Infinity,
-            url: BaseUrl + '/api/chatroom/',
+            url: BaseUrl + '/API/chatroom/',
             headers: {
                 'Authorization': `Token ${localStorage.getItem('token')}`,
                 'Content-Type': 'application/json'
