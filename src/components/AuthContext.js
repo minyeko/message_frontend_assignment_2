@@ -6,7 +6,6 @@ import axios from 'axios';
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-    debugger;
     const [auth, setAuth] = useState({
         isAuthenticated: false,
         user: null,
@@ -40,14 +39,6 @@ const AuthProvider = ({ children }) => {
 
     const logout = () => {
         // Implement logout logic, clear localStorage, etc.
-        axios.post(`${BaseUrl}/api/logout/`, null, {
-            headers: {
-                Authorization: `Token ${localStorage.getItem('token')}`,
-            },
-        });
-        localStorage.setItem('token', "");
-        localStorage.setItem('userName', "");
-
         setAuth({
             isAuthenticated: false,
             user: null,

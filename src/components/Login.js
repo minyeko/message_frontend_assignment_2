@@ -30,8 +30,6 @@ const Login = () => {
 
 
             localStorage.setItem('token', token);
-            localStorage.setItem('username', formData.username);
-
             //login(user);
             login(formData.username);
             navigate('/main'); // Redirect to homepage after successful login

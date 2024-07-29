@@ -5,11 +5,6 @@ import { AuthContext } from './AuthContext';
 
 function TopBar() {
     const { auth, logout } = useContext(AuthContext);
-    debugger;
-
-    const userName = localStorage.getItem('username');
-    const token = localStorage.getItem('token');
-
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
             <Container fluid>
@@ -18,7 +13,7 @@ function TopBar() {
                 <Navbar.Collapse id="navbarScroll">
                     <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
                         <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/chatroom">Privacy</Nav.Link>
+                        <Nav.Link href="/chatroom">Chat Room</Nav.Link>
                         <NavDropdown title="Programs" id="navbarScrollingDropdown">
                             <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
@@ -27,8 +22,8 @@ function TopBar() {
                         </NavDropdown>
                     </Nav>
                     <Nav className="d-flex">
-                        {(token !== "") ? (
-                            <NavDropdown title={userName || 'User'} id="basic-nav-dropdown">
+                        {auth.isAuthenticated ? (
+                            <NavDropdown title={auth.user?.username || 'User'} id="basic-nav-dropdown">
                                 <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
                             </NavDropdown>
                         ) : (
