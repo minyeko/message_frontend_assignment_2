@@ -29,17 +29,17 @@ function ChatRoom(props) {
 
     }, []);
 
-    function SVN() {
+    function createChatroom() {
 
         let data = {
-            NAME: document.getElementById('name').value,
+            name: document.getElementById('name').value,
             created_by: document.getElementById('created_by').value,
             members: Object.keys(selectedUsers).filter((key) => selectedUsers[key])
         }
         let config = {
             method: 'post',
             maxBodyLength: Infinity,
-            url: BaseUrl + '/API/chatroom/',
+            url: BaseUrl + '/api/chatroom/',
             headers: {
                 'Authorization': `Token ${localStorage.getItem('token')}`,
                 'Content-Type': 'application/json'
@@ -57,7 +57,7 @@ function ChatRoom(props) {
 
     }
 
-    function HANDLECHANGE(e) {
+    function handleChange(e) {
         const { name, checked } = e.target;
         setSelectedUsers({ ...selectedUsers, [name]: checked });
     }
@@ -86,7 +86,7 @@ function ChatRoom(props) {
                         type="checkbox"
                         name={user.id}
                         checked={selectedUsers[user.id] || false}
-                            onChange={HANDLECHANGE}
+                        onChange={handleChange}
                     />
                     <label>{user.username}</label>
                 </div>
@@ -104,7 +104,7 @@ function ChatRoom(props) {
                         ))}
                 </ul>
             </div>
-            <button onClick={SVN}>Create</button>
+            <button onClick={createChatroom}>Create</button>
 
         </div>
     );
