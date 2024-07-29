@@ -29,10 +29,10 @@ function ChatRoom(props) {
 
     }, []);
 
-    function createChatroom() {
+    function SVN() {
 
         let data = {
-            name: document.getElementById('name').value,
+            NAME: document.getElementById('name').value,
             created_by: document.getElementById('created_by').value,
             members: Object.keys(selectedUsers).filter((key) => selectedUsers[key])
         }
@@ -57,7 +57,7 @@ function ChatRoom(props) {
 
     }
 
-    function handleChange(e) {
+    function HANDLECHANGE(e) {
         const { name, checked } = e.target;
         setSelectedUsers({ ...selectedUsers, [name]: checked });
     }
@@ -86,7 +86,7 @@ function ChatRoom(props) {
                         type="checkbox"
                         name={user.id}
                         checked={selectedUsers[user.id] || false}
-                        onChange={handleChange}
+                            onChange={HANDLECHANGE}
                     />
                     <label>{user.username}</label>
                 </div>
@@ -104,7 +104,7 @@ function ChatRoom(props) {
                         ))}
                 </ul>
             </div>
-            <button onClick={createChatroom}>Create</button>
+            <button onClick={SVN}>Create</button>
 
         </div>
     );
