@@ -29,7 +29,7 @@ function ChatRoom(props) {
 
     }, []);
 
-    function createChatroom() {
+    function createChatRoom() {
 
         let data = {
             name: document.getElementById('name').value,
@@ -49,7 +49,7 @@ function ChatRoom(props) {
         axios.request(config)
             .then((response) => {
                 console.log(JSON.stringify(response.data));
-                setCreateChatroomStatus("Chatroom created successfully!!");
+                setCreateChatroomStatus("Chatroom created successfully !");
             })
             .catch((error) => {
                 console.log(error);
@@ -72,27 +72,26 @@ function ChatRoom(props) {
             <br/><br/>
             <div>
                 <p>Created By:
-                <select id="created_by">
-                    {users.map((user) => {
-                        return <option key={user.id} value={user.id}>{user.username}</option>;
-                    })}
-                </select></p>
+                    <select id="created_by">
+                        {users.map((user) => {
+                            return <option key={user.id} value={user.id}>{user.username}</option>;
+                        })}
+                    </select></p>
             </div>
             <div>
                 <p>Select members:</p>
                 {users.map((user) => (
-                <div className="user-list" key={user.id}>
-                    <input
-                        type="checkbox"
-                        name={user.id}
-                        checked={selectedUsers[user.id] || false}
-                        onChange={handleChange}
-                    />
-                    <label>{user.username}</label>
-                </div>
-                 ))}
+                    <div className="user-list" key={user.id}>
+                        <input
+                            type="checkbox"
+                            name={user.id}
+                            checked={selectedUsers[user.id] || false}
+                            onChange={handleChange}
+                        />
+                        <label>{user.username}</label>
+                    </div>
+                ))}
             </div>
-            <div className="alert alert-success">{createChatroomStatus}</div>
             <div>
                 <h2>Selected Items:</h2>
                 <ul>
@@ -104,8 +103,8 @@ function ChatRoom(props) {
                         ))}
                 </ul>
             </div>
-            <button onClick={createChatroom}>Create</button>
-
+            <button onClick={createChatRoom}>Create</button>
+            <div id={"chatroom-status"}>{createChatroomStatus}</div>
         </div>
     );
 }
