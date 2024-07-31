@@ -29,7 +29,7 @@ function ChatRoom(props) {
 
     }, []);
 
-    function CRoom() {
+    function createChatRoom() {
 
         let data = {
             name: document.getElementById('name').value,
@@ -48,8 +48,6 @@ function ChatRoom(props) {
         };
         axios.request(config)
             .then((response) => {
-                console.log("--------------------");
-                console.log("------------log repsonse----------")
                 console.log(JSON.stringify(response.data));
                 setCreateChatroomStatus("Chatroom created successfully !");
             })
@@ -105,7 +103,7 @@ function ChatRoom(props) {
                         ))}
                 </ul>
             </div>
-            <button onClick={CRoom}>Create</button>
+            <button onClick={createChatRoom}>Create</button>
             <div id={"chatroom-status"}>{createChatroomStatus}</div>
         </div>
     );
