@@ -4,7 +4,7 @@ import {BaseUrl} from "./constants";
 
 function ChatRoom(props) {
     const [users, setUsers] = useState([])
-    const [selectUsers, setSelectedUsers] = useState({});
+    const [selectedUsers, setSelectedUsers] = useState({});
     const [createChatroomStatus, setCreateChatroomStatus] = useState("")
     useEffect(() => {
         let config = {
@@ -20,7 +20,7 @@ function ChatRoom(props) {
         axios.request(config)
             .then((response) => {
                 console.log(JSON.stringify(response.data));
-                setUsrs(response.data);
+                setUsers(response.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -29,12 +29,12 @@ function ChatRoom(props) {
 
     }, []);
 
-    function createChatRoom() {
+    function createChatroom() {
 
         let data = {
             name: document.getElementById('name').value,
             created_by: document.getElementById('created_by').value,
-            members: Object.keys(sltU).filter((key) => sltU[key])
+            members: Object.keys(selectedUsers).filter((key) => selectedUsers[key])
         }
         let config = {
             method: 'post',
@@ -49,7 +49,7 @@ function ChatRoom(props) {
         axios.request(config)
             .then((response) => {
                 console.log(JSON.stringify(response.data));
-                setCreateChatroomStatus("Chatroom created successfully !");
+                setCreateChatroomStatus("Chatroom created successfully!!");
             })
             .catch((error) => {
                 console.log(error);
@@ -59,7 +59,7 @@ function ChatRoom(props) {
 
     function handleChange(e) {
         const { name, checked } = e.target;
-        setSltU({ ...sltU, [name]: checked });
+        setSelectedUsers({ ...selectedUsers, [name]: checked });
     }
 
     return (
@@ -72,39 +72,40 @@ function ChatRoom(props) {
             <br/><br/>
             <div>
                 <p>Created By:
-                    <select id="created_by">
-                        {users.map((i) => {
-                            return <option key={i.id} value={i.id}>{i.username}</option>;
-                        })}
-                    </select></p>
+                <select id="created_by">
+                    {users.map((user) => {
+                        return <option key={user.id} value={user.id}>{user.username}</option>;
+                    })}
+                </select></p>
             </div>
             <div>
                 <p>Select members:</p>
-                {users.map((j) => (
-                    <div className="user-list" key={j.id}>
-                        <input
-                            type="checkbox"
-                            name={j.id}
-                            checked={sltU[j.id] || false}
-                            onChange={handleChange}
-                        />
-                        <label>{j.username}</label>
-                    </div>
-                ))}
+                {users.map((user) => (
+                <div className="user-list" key={user.id}>
+                    <input
+                        type="checkbox"
+                        name={user.id}
+                        checked={selectedUsers[user.id] || false}
+                        onChange={handleChange}
+                    />
+                    <label>{user.username}</label>
+                </div>
+                 ))}
             </div>
+            <div className="alert alert-success">{createChatroomStatus}</div>
             <div>
                 <h2>Selected Items:</h2>
                 <ul>
-                    {usrs
+                    {users
                         .filter((option) =>
-                            sltU[option.id])
+                            selectedUsers[option.id])
                         .map((option) => (
                             <li key={option.id}>{option.username}</li>
                         ))}
                 </ul>
             </div>
-            <button onClick={createChatRoom}>Create</button>
-            <div id={"chatroom-status"}>{createChatroomStatus}</div>
+            <button onClick={createChatroom}>Create</button>
+
         </div>
     );
 }
