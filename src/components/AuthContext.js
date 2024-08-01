@@ -14,7 +14,7 @@ const AuthProvider = ({ children }) => {
 
     const getToken = async () => {
         try {
-            const response = await axios.post(`${BaseUrl}/api/login/`, LoginCredentials);
+            const response = await axios.post(`https://mis-assignment1-backend.vercel.app/api/login/`, LoginCredentials);
             const { token } = response.data;
             localStorage.setItem('token', token);
             setAuth({
