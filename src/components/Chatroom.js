@@ -3,8 +3,8 @@ import axios from "axios";
 import {BaseUrl} from "./constants";
 
 function ChatRoom(props) {
-    const [users, setUsers] = useState([])
-    const [selectedUsers, setSelectedUsers] = useState({});
+    const [usrs, setUsrs] = useState([])
+    const [sltU, setSltU] = useState({});
     const [createChatroomStatus, setCreateChatroomStatus] = useState("")
     useEffect(() => {
         let config = {
@@ -20,7 +20,7 @@ function ChatRoom(props) {
         axios.request(config)
             .then((response) => {
                 console.log(JSON.stringify(response.data));
-                setUsers(response.data);
+                setUsrs(response.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -34,7 +34,7 @@ function ChatRoom(props) {
         let data = {
             name: document.getElementById('name').value,
             created_by: document.getElementById('created_by').value,
-            members: Object.keys(selectedUsers).filter((key) => selectedUsers[key])
+            members: Object.keys(sltU).filter((key) => sltU[key])
         }
         let config = {
             method: 'post',
@@ -59,7 +59,7 @@ function ChatRoom(props) {
 
     function handleChange(e) {
         const { name, checked } = e.target;
-        setSelectedUsers({ ...selectedUsers, [name]: checked });
+        setSltU({ ...sltU, [name]: checked });
     }
 
     return (
@@ -73,31 +73,31 @@ function ChatRoom(props) {
             <div>
                 <p>Created By:
                     <select id="created_by">
-                        {users.map((user) => {
-                            return <option key={user.id} value={user.id}>{user.username}</option>;
+                        {usrs.map((i) => {
+                            return <option key={i.id} value={i.id}>{i.username}</option>;
                         })}
                     </select></p>
             </div>
             <div>
                 <p>Select members:</p>
-                {users.map((user) => (
-                    <div className="user-list" key={user.id}>
+                {usrs.map((j) => (
+                    <div className="user-list" key={j.id}>
                         <input
                             type="checkbox"
-                            name={user.id}
-                            checked={selectedUsers[user.id] || false}
+                            name={j.id}
+                            checked={sltU[j.id] || false}
                             onChange={handleChange}
                         />
-                        <label>{user.username}</label>
+                        <label>{j.username}</label>
                     </div>
                 ))}
             </div>
             <div>
                 <h2>Selected Items:</h2>
                 <ul>
-                    {users
+                    {usrs
                         .filter((option) =>
-                            selectedUsers[option.id])
+                            sltU[option.id])
                         .map((option) => (
                             <li key={option.id}>{option.username}</li>
                         ))}
