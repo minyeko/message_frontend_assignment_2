@@ -3,8 +3,8 @@ import axios from "axios";
 import {BaseUrl} from "./constants";
 
 function ChatRoom(props) {
-    const [usrs, setUsrs] = useState([])
-    const [sltU, setSltU] = useState({});
+    const [users, setUsers] = useState([])
+    const [selectUsers, setSelectedUsers] = useState({});
     const [createChatroomStatus, setCreateChatroomStatus] = useState("")
     useEffect(() => {
         let config = {
@@ -73,14 +73,14 @@ function ChatRoom(props) {
             <div>
                 <p>Created By:
                     <select id="created_by">
-                        {usrs.map((i) => {
+                        {users.map((i) => {
                             return <option key={i.id} value={i.id}>{i.username}</option>;
                         })}
                     </select></p>
             </div>
             <div>
                 <p>Select members:</p>
-                {usrs.map((j) => (
+                {users.map((j) => (
                     <div className="user-list" key={j.id}>
                         <input
                             type="checkbox"
