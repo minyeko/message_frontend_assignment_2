@@ -19,7 +19,7 @@ function ChatRoom(props) {
 
         axios.request(config)
             .then((response) => {
-                console.log("response from server" + JSON.stringify(response.data));
+                console.log(JSON.stringify(response.data));
                 setUsers(response.data);
             })
             .catch((error) => {
@@ -39,7 +39,7 @@ function ChatRoom(props) {
         let config = {
             method: 'post',
             maxBodyLength: Infinity,
-            url: 'https://mis-assignment1-backend.vercel.app/api/chatroom/',
+            url: BaseUrl + '/api/chatroom/',
             headers: {
                 'Authorization': `Token ${localStorage.getItem('token')}`,
                 'Content-Type': 'application/json'
